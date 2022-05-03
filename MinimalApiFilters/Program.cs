@@ -23,9 +23,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-string GreatName(string name) => $"Welcome to my API, {name}!";
+string GreetName(string name) => $"Welcome to my API, {name}!";
 //Adding a filter to the route
-app.MapGet("/v1/great/{name}", GreatName)
+app.MapGet("/v1/great/{name}", GreetName)
     .AddFilter(async (context, next) =>
     {
         var name = (string)context.Parameters[0];
@@ -37,7 +37,7 @@ app.MapGet("/v1/great/{name}", GreatName)
     });
 
 //Adding a customer filter to the route. Implement IRouteHandlerFilter
-app.MapGet("/v2/great/{name}", GreatName)
+app.MapGet("/v2/great/{name}", GreetName)
     .AddFilter<NameValidator>();
 
 app.Run();
